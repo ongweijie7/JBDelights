@@ -6,10 +6,10 @@ const Post = ({ index, title, image, hook }) => {
     return (
         <div className="post-container">
             <Link to={`/food/${index}`}>
-            <img className="image" src={image} alt="notfound"/>
-            <p className="title">{title}</p>
+            <img className="post-image" src={image}/>
+            <p className="post-title">{title}</p>
             </Link>   
-            <p className="hook">{hook}</p>
+            <p className="post-hook">{hook}</p>
         </div>
     )
 

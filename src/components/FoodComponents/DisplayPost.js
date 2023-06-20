@@ -30,8 +30,7 @@ const DisplayPost = () => {
                 foodPosts.map((post) => {
                     return (  
                         <Post index={post._id} title={post.title} image = {post.images.image1} 
-                            hook={post.details.hook} openingHours={post.details.openingHours} introduction={post.details.introduction}
-                            cost={post.details.cost} atmosphere={post.details.atmosphere}/>
+                            hook={post.hook} openingHours={post.details.openingHours} introduction={post.details.introduction}/>
                     )
                 })
             }

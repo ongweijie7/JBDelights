@@ -47,7 +47,6 @@
   transition: transform 0.5s ease;
   box-shadow: 5px 5px 20px black;
   position: relative;
-
 }
 
 .card img {
@@ -59,35 +58,38 @@
 }
 
 .card .intro {
-  display: flex;
-  flex-direction: column;
   color: white;
   box-sizing: border-box;
   position: absolute;
-  bottom: 0px;
-  height: 15%;
-  width: inherit;
-  padding: 6px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 16%;
+  width: 100%;
+  padding: 5px;
   background: rgb(27, 27, 27, 0.5);
-  z-index: 1;
-  
-  
+  z-index: 1; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
 }
 
 
 .card .intro h4 {
-  margin: 5px 0px 5px 0px;
+  display: block;
+  margin: 0 auto;
   text-align: center;
-  position: absolute;
-  bottom: 7.5%;
-  font-size: 2rem;
+  font-size: 2.5rem;
   flex-shrink: 1;
+  flex-basis: 0;
 }
 
 .card .intro p {
   font-size: 20px;
-  visibility: hidden;
-  opacity: 0;
+  padding: 0 15px;
+  display: none;
 }
 
 .card:hover {
@@ -102,13 +104,8 @@
   transform: rotate(-1deg);
 }
 
-.card:hover .intro h4 {
-  position: static;
-}
-
 .card:hover p{
-  visibility: visible;
-  opacity: 1;
+  display: block;
   transform: rotate(-1deg);
 }
 

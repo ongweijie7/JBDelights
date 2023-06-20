@@ -7,13 +7,12 @@ const Form = () => {
 
 
     const [title, setTitle] = useState('');
+    const [address, setAddress] = useState('');
     const [image1, setImage1] = useState('');
     const [image2, setImage2] = useState('');
-    const [hook, setHook] = useState('');
     const [openingHours, setOpeningHours] = useState('');
     const [introduction, setIntroduction] = useState('');
-    const [cost, setCost] = useState('');
-    const [atmosphere, setAtmosphere] = useState('');
+    
 
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
@@ -27,16 +26,16 @@ const Form = () => {
         setImage2(e.target.value);
     };
 
-    // const handleHook = (e) => {
-    //     setHook(e.target.value);
-    // };
-
     const handleOpeningHours = (e) => {
         setOpeningHours(e.target.value);
     };
 
     const handleIntroduction = (e) => {
         setIntroduction(e.target.value);
+    };
+
+    const handleAddress = (e) => {
+        setAddress(e.target.value);
     };
 
     // const handleCost = (e) => {
@@ -52,8 +51,8 @@ const Form = () => {
         event.preventDefault();
 
         const images = { image1, image2};
-        const details = { hook, openingHours, introduction, cost, atmosphere };
-        const blogPost = { title, images, details };
+        const details = { openingHours, introduction };
+        const blogPost = { title, address, images, details };
         const jsonString = JSON.stringify(blogPost);
         
         const createPost = async (post) => {
@@ -90,6 +89,12 @@ const Form = () => {
             placeholder="Title of the dish"
             value={title}
             onChange={handleTitleChange}
+        />
+        <input
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={handleAddress}
         />
         <input
             type="text"

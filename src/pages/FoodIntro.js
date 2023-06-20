@@ -7,6 +7,7 @@ const FoodIntro = () => {
     const [imgUrl1, setImgUrl1] = useState(null);
     const [imgUrl2, setImgUrl2] = useState(null);
     const [title, setTitle] = useState(null);
+    const [address, setAddress] = useState(null);
     const [openingHours, setOpeningHours] = useState(null);
     const [intro, setIntro] = useState(null);
     let formattedText = intro;
@@ -30,6 +31,7 @@ const FoodIntro = () => {
                 setImgUrl1(data.images.image1);
                 setImgUrl2(data.images.image2);
                 setTitle(data.title);
+                setAddress(data.address);
                 setOpeningHours(data.details.openingHours);
                 setIntro(data.details.introduction);
 
@@ -46,8 +48,9 @@ const FoodIntro = () => {
             <div className="content-container">
                 <div className="main-content">
                     <img className="post-picture" src={imgUrl1}/>
-                    <div className="intro">
+                    <div className="food-intro">
                         <p className="food-title">{title}</p>
+                        <p>{address}</p>
                         <p>{openingHours}</p>
                         <p>Written June 9 2023 by batman</p>
                     </div>

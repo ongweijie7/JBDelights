@@ -1,5 +1,5 @@
 .content-container {
-    padding: 20vh 50px 20px 50px;
+    padding: 5vh 50px 20px 50px;
     display: flex;
     justify-content: center;
 }
@@ -9,7 +9,7 @@
     align-items: center;
     box-sizing: border-box;
     display: flex;
-    background-color: whitesmoke;
+
     width: 60vw;
     height: max-content;
 }
@@ -23,21 +23,22 @@
     border: 2px solid;
 }
 
-.intro {
+.food-intro {
     margin:20px;
     max-width: 80%;
+    text-align: center;
 }
 
-.intro * {
+.food-intro * {
     margin:5px 5px 0px 5px;
 }
 
-.intro .food-title {
+.food-intro .food-title {
     font-size: 4rem; 
     font-weight: 600;
 }
 
-.intro p {
+.food-intro p {
     font-size: 1rem;
     font-weight: 550;
     text-align: center;

@@ -4,9 +4,9 @@
   justify-content: space-between;
   align-items: center;
   background-color: #333;
-  position: fixed;
+  /* position: fixed; */
   height: clamp(object-fit, 8vh, 10vh);
-  width: 100%;
+  width: inherit;
   z-index: 9999;
   color: white;
   padding: 10px;
