@@ -9,7 +9,7 @@
     align-items: center;
     box-sizing: border-box;
     display: flex;
-
+    background-color: whitesmoke;
     width: 60vw;
     height: max-content;
 }

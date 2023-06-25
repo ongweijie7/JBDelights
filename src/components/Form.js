@@ -2,7 +2,7 @@ import "./Form.css";
 import React, { useState } from 'react';
 
 
-const Form = () => {
+const Form = ( { createUrl } ) => {
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -10,6 +10,7 @@ const Form = () => {
     const [address, setAddress] = useState('');
     const [image1, setImage1] = useState('');
     const [image2, setImage2] = useState('');
+    const [hook, setHook] = useState('');
     const [openingHours, setOpeningHours] = useState('');
     const [introduction, setIntroduction] = useState('');
     
@@ -38,9 +39,9 @@ const Form = () => {
         setAddress(e.target.value);
     };
 
-    // const handleCost = (e) => {
-    //     setCost(e.target.value);
-    // };
+    const handleHook = (e) => {
+        setHook(e.target.value);
+    };
 
     // const handleAtmosphere = (e) => {
     //     setAtmosphere(e.target.value);
@@ -52,13 +53,12 @@ const Form = () => {
 
         const images = { image1, image2};
         const details = { openingHours, introduction };
-        const blogPost = { title, address, images, details };
+        const blogPost = { title, address, images, details, hook };
         const jsonString = JSON.stringify(blogPost);
         
         const createPost = async (post) => {
             try {
-                const url = "http:localhost:3000/food/create";
-                const createPost= await fetch("http://localhost:3000/food/create", {
+                const createPost= await fetch(createUrl, {
                     method: "POST",
                     headers: {
                       "Content-Type" : "application/json"
@@ -67,7 +67,6 @@ const Form = () => {
                 });
                 const response = await createPost;
                 const reply = await response.text();
-                console.log(reply);
             } catch (error) {
                 console.log(error);
             }
@@ -98,28 +97,28 @@ const Form = () => {
         />
         <input
             type="text"
-            placeholder="image1"
+            placeholder="Image1"
             value={image1}
             onChange={handleImage1}
         />
-        <input
+        {/* <input
             type="text"
             placeholder="image2"
             value={image2}
             onChange={handleImage2}
-        />
-        {/* <textarea
-            placeholder="hook"
-            value={hook}
-            onChange={handleHook}
         /> */}
         <input
-            placeholder="opening hours"
+            placeholder="Hook"
+            value={hook}
+            onChange={handleHook}
+        />
+        <input
+            placeholder="Opening hours"
             value={openingHours}
             onChange={handleOpeningHours}
         />
         <textarea
-            placeholder="introduction"
+            placeholder="Introduction"
             value={introduction}
             onChange={handleIntroduction}
         />

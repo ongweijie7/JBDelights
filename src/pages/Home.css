@@ -1,3 +1,8 @@
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 .home-container {
   height: 200vh;
   display: flex;
@@ -6,6 +11,7 @@
 
 .welcome-section {
   background-image: url("../../public/images/desaru-beach.jpeg");
+  opacity: 0.90;
   background-size: cover;
   height: 100vh; 
   display: flex;

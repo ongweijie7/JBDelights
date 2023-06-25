@@ -1,0 +1,15 @@
+.adventures-container {
+    display:flex;
+    flex-direction:row;
+    height:100vh;
+    padding: 5vh 15px 15px 15px;
+    background-color: white;
+}
+  
+.adventures-post {
+    flex: 80%;
+}
+  
+.form {
+    flex:20%;
+}

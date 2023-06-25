@@ -59,23 +59,26 @@ export default function Home() {
                             </div>
                     </div>
                 </Link>
+                <Link to="fineDining">
+                    <div className="card">
+                        <img src="/fine-dining.jpg" alt="not"/>
+                        <div className="intro">
+                            <h4>Fine Dining</h4>
+                            <p>Feeling exquisite? Well we have just the recommendations</p>
+                        </div>
+                        
+                    </div>
+                </Link>
+                <Link to="adventures">
+                    <div className="card">
+                        <img src="/adventures.jpeg" alt="not"/>
+                        <div className="intro">
+                            <h4>Adventures</h4>
+                            <p>Look no further for a day of fun and adrenaline!</p>
+                        </div>
+                    </div>
+                </Link>
                 
-                <div className="card">
-                    <img src="/fine-dining.jpg" alt="not"/>
-                    <div className="intro">
-                        <h4>Fine Dining</h4>
-                        <p>Feeling exquisite? Well we have just the recommendations</p>
-                    </div>
-                    
-                </div>
-                <div className="card">
-                    <img src="/adventures.jpeg" alt="not"/>
-                    <div className="intro">
-                        <h4>Adventures</h4>
-                        <p>Look no further for a day of fun and adrenaline!</p>
-                    </div>
-                    
-                </div>
             </div>
         </div>
         
