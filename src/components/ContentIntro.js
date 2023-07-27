@@ -1,6 +1,7 @@
-import "./contentIntro.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+
+import "./contentIntro.css";
 
 const ContentIntro = ( { apiUrl } ) => {
     const { id } = useParams() /*retrieves the parameter from the url*/
@@ -10,6 +11,7 @@ const ContentIntro = ( { apiUrl } ) => {
     const [address, setAddress] = useState(null);
     const [openingHours, setOpeningHours] = useState(null);
     const [intro, setIntro] = useState(null);
+    
     let formattedText = intro;
     if (formattedText) {
         const paragraphs = intro.split("\n\n");
@@ -35,8 +37,6 @@ const ContentIntro = ( { apiUrl } ) => {
                 setAddress(data.address);
                 setOpeningHours(data.details.openingHours);
                 setIntro(data.details.introduction);
-
-                console.log(data);
             } catch (error) {
                 console.log(error);
             }

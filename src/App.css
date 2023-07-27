@@ -1,7 +1,15 @@
+:root {
+  /*Login*/
+  --header-fs: calc(2rem + 2vh);
+  --label-fs: calc(0.5rem + 1vh);
+  --login--content-bg-color: antiquewhite;
+}
+
 /* Removes the white spaces*/
 body {
     margin: 0px;
 }
+
 
 .app-container {
   display: flex;

@@ -54,7 +54,6 @@ const Form = ( { createUrl } ) => {
         const images = { image1, image2};
         const details = { openingHours, introduction };
         const blogPost = { title, address, images, details, hook };
-        const jsonString = JSON.stringify(blogPost);
         
         const createPost = async (post) => {
             try {
@@ -63,7 +62,7 @@ const Form = ( { createUrl } ) => {
                     headers: {
                       "Content-Type" : "application/json"
                     },
-                    body: post
+                    body: JSON.stringify(blogPost)
                 });
                 const response = await createPost;
                 const reply = await response.text();
@@ -71,7 +70,7 @@ const Form = ( { createUrl } ) => {
                 console.log(error);
             }
         }
-        createPost(jsonString);
+        createPost(blogPost);
 
         setTimeout(() => {
             setIsLoading(false);

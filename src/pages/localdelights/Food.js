@@ -1,9 +1,11 @@
-import "./Food.css";
+import { motion } from "framer-motion";
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import DisplayPost from "../../components/DisplayPost";
 import Form from "../../components/Form";
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
-import { motion } from "framer-motion";
+
+import "./Food.css";
 
 const Food = () => {
 
@@ -19,7 +21,7 @@ const Food = () => {
 
 
     return (
-        <motion.div className="food-page"
+        <motion.section className="food-page"
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         exit={{opacity: 0}}
@@ -27,7 +29,7 @@ const Food = () => {
             <ScrollToTop/>
             <DisplayPost className="display-post" apiUrl="http://localhost:3000/food" routeUrl="/food/"/>
             <Form className="form" createUrl={"http://localhost:3000/food/create"}/>
-        </motion.div>
+        </motion.section>
     )
 }
 

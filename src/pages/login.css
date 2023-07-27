@@ -1,0 +1,66 @@
+
+.login {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../public/login-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+
+.login > .content {
+    background-color: var(--login--content-bg-color);
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 20px 1px;
+}
+.login p {
+    margin: 0;
+}
+
+.login > .content > * {
+    margin-bottom: 20px;
+}
+
+.login > .content .title {
+    text-align: center;
+    font-weight: 600;
+    font-size: var(--header-fs);
+    margin: 50px;
+}
+
+.login div > * {
+    margin-bottom: 10px;
+}
+
+.login div > .label { 
+    font-size: calc(var(--label-fs) + 0.3rem);
+    font-weight: 500;
+}
+
+.login div > input {
+    width: 100%;
+    font-size: var(--label-fs);
+}
+
+.login .sign-up-link {
+    text-decoration: underline;
+}
+
+.login .sign-up-link:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+
+.login button {
+    border-radius: 10px;
+    font-size: calc(var(--label-fs) + 0.3rem);
+    transition: transform 0.5s ease;
+}
+.login button:hover {
+    background-color: azure;
+    cursor: pointer;
+    transform: translateY(-5px);
+}

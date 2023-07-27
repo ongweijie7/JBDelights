@@ -5,10 +5,10 @@ import Form from "../../components/Form";
 const Adventures = () => {
     
     return (
-        <div className="adventures-container">
+        <section className="adventures-container">
             <DisplayPost className="adventures-post" routeUrl="/adventures/" apiUrl="http://localhost:3000/adventures"/>
             <Form className="form" createUrl={"http://localhost:3000/adventures/create"}/>
-        </div>
+        </section>
     )
 }
 
