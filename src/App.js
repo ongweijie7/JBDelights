@@ -1,4 +1,11 @@
+import { AnimatePresence } from "framer-motion";
+import jwt_decode from "jwt-decode";
+import { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import Navbar from "./components/navbar/Navbar";
+import ViewSubmissions from "./pages/adminview/ViewSubmissions";
+import ViewSubmissionsIntro from "./pages/adminview/ViewSubmissionsIntro";
 import Adventures from "./pages/adventures/Adventures";
 import AdventuresIntro from "./pages/adventures/AdventuresIntro";
 import FineDining from "./pages/finedining/FineDining";
@@ -8,10 +15,6 @@ import Food from "./pages/localdelights/Food";
 import FoodIntro from "./pages/localdelights/FoodIntro";
 import Login from "./pages/Login";
 import UserContext from "./UserContext";
-import { AnimatePresence } from "framer-motion";
-import jwt_decode from "jwt-decode";
-import { createContext, useEffect, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
 
 import "./App.css";
 
@@ -69,6 +72,12 @@ const App = () => {
               <Route path="/adventures" element={<Adventures/>}/>
               <Route path="/adventures/:id" element={<AdventuresIntro/>}/>
             </Route>
+
+            <Route>
+              <Route path="/admin/submissions" element={<ViewSubmissions/>}/>
+              <Route path="/admin/:id" element={<ViewSubmissionsIntro/>}/>
+            </Route>
+
           </Routes>
         </AnimatePresence>
       </div>

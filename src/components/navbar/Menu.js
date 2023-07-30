@@ -1,7 +1,7 @@
 import UserContext from '../../UserContext';
 import { useContext, useState } from 'react';
 import { ImMenu } from "react-icons/im";
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 
 import "./menu.css";
 
@@ -35,7 +35,7 @@ const Menu = () => {
             {isMenuOpen && (
             <div className="dropdown">
                 {user ? <p>{user}</p> : <p>You are not logged in</p>}
-            {isAdmin && <div onClick={() => {}}>View Submissions</div>}
+            {isAdmin && <div onClick={() => navigate("/admin/submissions")}>View Submissions</div>}
             <div onClick={viewFavourites}>Likes</div>
             <div onClick={ user ? logout : login }>{user ? "Log Out" : "Log in" }</div>
             </div>

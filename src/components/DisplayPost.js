@@ -12,7 +12,11 @@ const DisplayPost = ({ apiUrl, routeUrl }) => {
         const getData = async () => {
             try {
                 const url = apiUrl;
-                const res = await fetch(url);
+                const res = await fetch(url, {
+                    headers: {
+                        "authorisation" : "bring " + localStorage.getItem("token")
+                      },
+                });
                 const data = await res.json();
                 
                 setPosts(data);
@@ -20,22 +24,9 @@ const DisplayPost = ({ apiUrl, routeUrl }) => {
                 console.log(error);
             }
         }
-
-        // const savedPosts = localStorage.getItem('postsData');
-        // if (savedPosts) {
-        //     setPosts(JSON.parse(savedPosts));
-        // } else {
-        //     getData();
-        //     setTimeout(() => console.log(posts), 2000);
-        // }
         getData();
         setTimeout(() => console.log(posts), 1000);
     }, [])
-
-    // useEffect(() => {
-    //     // Save the posts data to localStorage whenever the 'posts' state changes
-    //     localStorage.setItem('postsData', JSON.stringify(posts));
-    //   }, [posts]);
     
 
     return (

@@ -28,7 +28,7 @@ const ContentIntro = ( { apiUrl } ) => {
         const fetchData = async (id) => {
             try {
                 const url = apiUrl + id;
-                console.log(url)
+                console.log(url);
                 const res = await fetch(url);
                 const data = await res.json();
                 setImgUrl1(data.images.image1);

@@ -45,14 +45,13 @@
   background-color: #555
 }
 
-.Pages a {
+.Navbar .Pages ul li > a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  
 }
 
-.Pages {
+.Navbar .Pages {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
