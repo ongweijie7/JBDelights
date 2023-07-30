@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { BsArrowLeftCircleFill } from "react-icons/bs";
+import { BsArrowLeftSquareFill } from "react-icons/bs";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import UserContext from "../UserContext";
@@ -60,8 +60,7 @@ const Login = () => {
                     setIsLoggedIn(true);
 
                     /*Go back to the previous page */
-                    const { from } = location.state || { from: { pathname: '/' } };
-                    navigate(from);
+                    navigate(-1);
                 } else {
                     setIsWrongDetails(true);
                 }
@@ -105,8 +104,7 @@ const Login = () => {
     };
 
     const goBack = () => {
-        const { from } = location.state || { from: { pathname: '/' } };
-        navigate(from);
+        navigate(-1);
     }
 
     return (
@@ -118,13 +116,13 @@ const Login = () => {
                     <div>
                         <p className="label">UserName</p>
                         <input type="text"
-                            placeholder="UserName"
+                            placeholder="Username"
                             value={email}
                             onChange={handleEmailInput} />
                     </div>
                     <div>
                         <p className="label">Password</p>
-                        <input type="text"
+                        <input type="password"
                             placeholder="Password"
                             value={password}
                             onChange={handlePasswordInput} />
@@ -136,22 +134,22 @@ const Login = () => {
                     <div>
                     <p className="label">Email</p>
                     <input type="text"
-                        placeholder="UserName"
+                        placeholder="Username"
                         value={newEmail}
                         onChange={handleCreateEmail} />
                     </div>
 
                     <div>
                     <p className="label">Enter Password</p>
-                    <input type="text"
+                    <input type="password"
                         placeholder="Password"
                         value={newPassword}
                         onChange={handleCreatePassword} />
                     </div>
 
                     <div>
-                    <p className="label">Confirm Password</p>
-                    <input type="text"
+                    <p className="hidden">Confirm Password</p>
+                    <input type="password"
                         placeholder="Confirm Password"
                         value={confirmNewPassword}
                         onChange={handleConfirmPassword} />
@@ -165,9 +163,9 @@ const Login = () => {
 
                 
                 <button className="login-button" onClick={signup ? handleSignUp : handleLogin}>{signup ? "Sign Up" : "Login"}</button>
-                <p className="sign-up-link" onClick={() => setSignup(!signup)}>Not a user yet? Click here to sign up</p>
+                <p className="sign-up-link" onClick={() => setSignup(!signup)}>{signup ? "Back to login" : "Not a user yet? Click here to sign up" }</p>
                 <div className="go-back" onClick={goBack}>
-                    <BsArrowLeftCircleFill  className="return-icon"/>
+                    <BsArrowLeftSquareFill  className="return-icon"/>
                 </div>
                 
             </div>
