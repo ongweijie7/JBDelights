@@ -43,10 +43,6 @@ const Form = ( { createUrl } ) => {
         setHook(e.target.value);
     };
 
-    // const handleAtmosphere = (e) => {
-    //     setAtmosphere(e.target.value);
-    // };
-
     const handleSubmit = (event) => {
         setIsLoading(true);
         event.preventDefault();
@@ -64,7 +60,7 @@ const Form = ( { createUrl } ) => {
                     },
                     body: JSON.stringify(blogPost)
                 });
-                const response = await createPost;
+                const response = await createPost.json;
                 const reply = await response.text();
             } catch (error) {
                 console.log(error);
