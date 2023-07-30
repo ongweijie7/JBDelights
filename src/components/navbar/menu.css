@@ -1,0 +1,35 @@
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    position: relative;
+    margin-right: 20px;
+    justify-content: center;
+}
+
+.menu-container .menu-button {
+    font-size: calc(var(--navbar-fs) + 20px); 
+    color: white;
+}
+
+.dropdown {
+    width: 20ch;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: white;
+    background: black;
+    padding: 20px;
+    z-index: 11;
+    font-size: var(--navbar-fs);
+}
+
+.dropdown * {
+    margin: 10px;
+}
+
+.dropdown > div:hover{
+    background-color: #555;
+    cursor: pointer;
+}

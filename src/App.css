@@ -3,6 +3,11 @@
   --header-fs: calc(2rem + 2vh);
   --label-fs: calc(0.5rem + 1vh);
   --login--content-bg-color: antiquewhite;
+
+  /* nabvbar */
+  --navbar-header-fs: 3rem;
+  --navbar-fs: 1.8rem;
+  --navbar-color: #333;
 }
 
 /* Removes the white spaces*/

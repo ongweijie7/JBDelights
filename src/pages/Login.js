@@ -1,13 +1,14 @@
+
 import { useContext, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 
-// import UserContext from "../UserContext";
+import UserContext from "../UserContext";
 
 import "./login.css";
 
 const Login = () => {
     /* for setting the user that is logged in */
-    // const { successfulLogin } = useContext(UserContext);
+    const { successfulLogin } = useContext(UserContext);
     
     const navigate = useNavigate();
     const location = useLocation();
@@ -51,13 +52,11 @@ const Login = () => {
                     },
                     body: JSON.stringify(loginDetails)
                 });
-                console.log(loginResponse);
                 if (loginResponse.ok) {
                     const data = await loginResponse.json();
                     const token = data.token;
-                    localStorage.setItem("jwtToken", token);
-                    // successfulLogin("token" + " has LOGGED IN OH YEA");
-                    // setToken(token);
+                    localStorage.setItem("token", token);
+
                     /*Go back to the previous page */
                     const { from } = location.state || { from: { pathname: '/' } };
                     navigate(from);
@@ -90,6 +89,8 @@ const Login = () => {
                     },
                     body: JSON.stringify(details)
                 });
+                const data = await response.json();
+                console.log(data.message);
                 
             } catch (error) {
                 console.log(error);

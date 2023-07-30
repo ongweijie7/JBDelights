@@ -1,5 +1,6 @@
 import { AnimatePresence } from "framer-motion";
-import { createContext, useState } from "react";
+import jwt_decode from "jwt-decode";
+import { createContext, useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
@@ -11,22 +12,36 @@ import Home from "./pages/Home";
 import Food from "./pages/localdelights/Food";
 import FoodIntro from "./pages/localdelights/FoodIntro";
 import Login from "./pages/Login";
-
-// import UserContext from "./UserContext";
+import UserContext from "./UserContext";
 
 import "./App.css";
 
 const App = () => {
-  // const [user, setUser] = useState("nobody");
+  const [user, setUser] = useState(null);
+  
 
-  // const successfulLogin = (username) => {
-  //   setUser(username);
-  //   console.log(user);
-  // }
+  const successfulLogin = (username) => {
+    setUser(username);
+    console.log(username);
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    try {
+      if (token) {
+        const decodedToken = jwt_decode(token);
+        setUser(decodedToken.email)
+      }
+      console.log(token);
+    } catch (error) {
+      console.error('Error decoding the JWT token:', error);
+    }
+  }
+  ,[])
 
 
   return (
-    // <UserContext.Provider value={user}>
+    <UserContext.Provider value={{successfulLogin, user}}>
       <div className="app-container">
         <Navbar/>
         <AnimatePresence>
@@ -52,7 +67,7 @@ const App = () => {
           </Routes>
         </AnimatePresence>
       </div>
-      // </UserContext.Provider>
+    </UserContext.Provider>
   );
 }
 

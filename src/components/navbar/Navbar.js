@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
+import Menu from "./Menu";
 
 import "./Navbar.css";
 
 const Navbar = () => {
     const location  = useLocation()
-    console.log(location.pathname);
     
     if (location.pathname == "/login") {
         return (<></>);
@@ -17,6 +17,7 @@ const Navbar = () => {
                         <li><Link to="/food">Local Delights</Link></li>
                         <li><Link to="/fineDining">Fine Dining</Link></li>
                         <li><Link to="/adventures">Adventures</Link></li>
+                        <Menu/>
                     </ul>
                 </div>
             </div>
