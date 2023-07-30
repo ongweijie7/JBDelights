@@ -1,6 +1,6 @@
-import "./Form.css";
 import React, { useState } from 'react';
 
+import "./Form.css";
 
 const Form = ( { createUrl } ) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -60,8 +60,9 @@ const Form = ( { createUrl } ) => {
                     },
                     body: JSON.stringify(blogPost)
                 });
-                const response = await createPost.json;
-                const reply = await response.text();
+                const response = await createPost.json();
+                const reply = await response.text;
+                console.log(reply);
             } catch (error) {
                 console.log(error);
             }

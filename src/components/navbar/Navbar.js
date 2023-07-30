@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
 import Menu from "./Menu";
+import { Link, useLocation } from "react-router-dom";
 
 import "./Navbar.css";
 

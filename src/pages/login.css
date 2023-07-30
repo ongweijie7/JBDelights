@@ -14,6 +14,7 @@
     padding: 60px;
     border-radius: 15px;
     box-shadow: 4px 4px 20px 1px;
+    position: relative;
 }
 .login p {
     margin: 0;
@@ -53,13 +54,32 @@
     color: blue;
 }
 
+.login .go-back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* background-color: black; */
+}
 
-.login button {
+.login .go-back .return-icon {
+    font-size: calc(var(--label-fs) + 1.5rem);
+    margin-bottom: 0;
+    padding: 10px;
+    color: black;
+}
+
+.login .login-button {
     border-radius: 10px;
     font-size: calc(var(--label-fs) + 0.3rem);
     transition: transform 0.5s ease;
 }
-.login button:hover {
+.login .login-button:hover {
     background-color: azure;
     cursor: pointer;
     transform: translateY(-5px);

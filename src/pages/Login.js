@@ -1,5 +1,5 @@
-
 import { useContext, useState } from "react";
+import { BsArrowLeftCircleFill } from "react-icons/bs";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import UserContext from "../UserContext";
@@ -8,7 +8,7 @@ import "./login.css";
 
 const Login = () => {
     /* for setting the user that is logged in */
-    const { successfulLogin } = useContext(UserContext);
+    const { setIsLoggedIn } = useContext(UserContext);
     
     const navigate = useNavigate();
     const location = useLocation();
@@ -29,9 +29,10 @@ const Login = () => {
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
+    /* Register information */
     const [isWrongRegisterDetails, setIsWrongRegisterDetails] = useState(false);
     const [userExists, setUserExists] = useState(false);
-
+    const [isSuccessfullyCreated, setIsSuccessfullyCreated] = useState(false);
 
 
     const handleCreateEmail = (event) => setNewEmail(event.target.value);
@@ -56,6 +57,7 @@ const Login = () => {
                     const data = await loginResponse.json();
                     const token = data.token;
                     localStorage.setItem("token", token);
+                    setIsLoggedIn(true);
 
                     /*Go back to the previous page */
                     const { from } = location.state || { from: { pathname: '/' } };
@@ -85,12 +87,12 @@ const Login = () => {
                 const response = await fetch("http://localhost:3000/login/register", {
                     method: "POST",
                     headers: {
-                      "Content-Type" : "application/json"
+                      "Content-Type" : "application/json", 
                     },
                     body: JSON.stringify(details)
                 });
                 const data = await response.json();
-                console.log(data.message);
+                setIsSuccessfullyCreated(true);
                 
             } catch (error) {
                 console.log(error);
@@ -101,6 +103,12 @@ const Login = () => {
         registerUser({email: newEmail, password: newPassword}).then((value) => setIsLoading(false));
         
     };
+
+    const goBack = () => {
+        const { from } = location.state || { from: { pathname: '/' } };
+        navigate(from);
+    }
+
     return (
         <section className="login">
             <div className="content">
@@ -150,14 +158,17 @@ const Login = () => {
                     </div>
                     {isWrongRegisterDetails ? <p>Password don't match</p> : <></>}
                     {userExists ? <p>User already exists</p> : <></>}
+                    {isSuccessfullyCreated ? <p>Sucessfully created!</p> : <></>}
                     </>
                 }
                 
 
                 
-                <button onClick={signup ? handleSignUp : handleLogin}>{signup ? "Sign Up" : "Login"}</button>
+                <button className="login-button" onClick={signup ? handleSignUp : handleLogin}>{signup ? "Sign Up" : "Login"}</button>
                 <p className="sign-up-link" onClick={() => setSignup(!signup)}>Not a user yet? Click here to sign up</p>
-                
+                <div className="go-back" onClick={goBack}>
+                    <BsArrowLeftCircleFill  className="return-icon"/>
+                </div>
                 
             </div>
         </section>
