@@ -35,7 +35,7 @@ const DisplayPost = ({ apiUrl, routeUrl }) => {
         {posts && <div className="display-post">
             {posts.map((post) => {
                 return (  
-                    <Post routeUrl={routeUrl} index={post._id} title={post.title} image = {post.images.image1} 
+                    <Post routeUrl={routeUrl} index={post._id} title={post.title} image = {post.images.image1}
                         hook={post.hook} openingHours={post.details.openingHours} introduction={post.details.introduction}/>
                 )
             })

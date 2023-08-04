@@ -5,7 +5,6 @@ import "./Form.css";
 const Form = ( { createUrl } ) => {
     const [isLoading, setIsLoading] = useState(false);
 
-
     const [title, setTitle] = useState('');
     const [address, setAddress] = useState('');
     const [image1, setImage1] = useState('');
@@ -47,26 +46,9 @@ const Form = ( { createUrl } ) => {
         setIsLoading(true);
         event.preventDefault();
 
-        const images = { image1, image2};
+        const images = { image1, image2 };
         const details = { openingHours, introduction };
         const blogPost = { title, address, images, details, hook };
-        
-        const createPost = async (post) => {
-            try {
-                const createPost= await fetch(createUrl, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type" : "application/json"
-                    },
-                    body: JSON.stringify(blogPost)
-                });
-                const response = await createPost.json();
-                const reply = await response.text;
-                console.log(reply);
-            } catch (error) {
-                console.log(error);
-            }
-        }
         createPost(blogPost);
 
         setTimeout(() => {
@@ -74,6 +56,25 @@ const Form = ( { createUrl } ) => {
         }, 2000);
 
     };
+
+    /* API calls */
+    const createPost = async (post) => {
+        try {
+            const createPost= await fetch(createUrl, {
+                method: "POST",
+                headers: {
+                  "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(post)
+            });
+            const response = await createPost.json();
+            const reply = await response.text;
+            console.log(reply);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    /* ************** */
 
     return (
     <div className="form-container">
@@ -97,12 +98,6 @@ const Form = ( { createUrl } ) => {
             value={image1}
             onChange={handleImage1}
         />
-        {/* <input
-            type="text"
-            placeholder="image2"
-            value={image2}
-            onChange={handleImage2}
-        /> */}
         <input
             placeholder="Hook"
             value={hook}
@@ -118,16 +113,6 @@ const Form = ( { createUrl } ) => {
             value={introduction}
             onChange={handleIntroduction}
         />
-        {/* <textarea
-            placeholder="cost"
-            value={cost}
-            onChange={handleCost}
-        />
-        <textarea
-            placeholder="atmosphere"
-            value={atmosphere}
-            onChange={handleAtmosphere}
-        /> */}
         <button type="submit" onSubmit={handleSubmit} disabled={isLoading}>
             {isLoading ? "Submitting..." : "Submit Post"}
         </button>

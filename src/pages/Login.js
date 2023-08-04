@@ -69,7 +69,6 @@ const Login = () => {
                 console.log(error);
             }
         }
-        
         login({email: email, password: password}).then((value) => setIsLoading(false));
     };
     

@@ -3,15 +3,19 @@ import { useParams } from "react-router";
 
 import "./contentIntro.css";
 
-const ContentIntro = ( { apiUrl } ) => {
+const ContentIntro = ( { apiUrl, isSubmission } ) => {
     const { id } = useParams() /*retrieves the parameter from the url*/
+
+    /* Post information */
+    const [postObject, setPostObject] = useState(null);
     const [imgUrl1, setImgUrl1] = useState(null);
     const [imgUrl2, setImgUrl2] = useState(null);
     const [title, setTitle] = useState(null);
     const [address, setAddress] = useState(null);
     const [openingHours, setOpeningHours] = useState(null);
     const [intro, setIntro] = useState(null);
-    
+    const [tag, setTag] = useState(null);
+
     let formattedText = intro;
     if (formattedText) {
         const paragraphs = intro.split("\n\n");
@@ -21,28 +25,65 @@ const ContentIntro = ( { apiUrl } ) => {
     } else {
         formattedText = "";
     }
-    
 
+    /* Buttons */
+    const approveSubmission = () => {
+        uploadSubmission(id).then(() => deleteSubmission(id));
+    }
+    const rejectSubmission = () => {
+        deleteSubmission(id);
+    }
 
     useEffect(() => {
-        const fetchData = async (id) => {
-            try {
-                const url = apiUrl + id;
-                console.log(url);
-                const res = await fetch(url);
-                const data = await res.json();
-                setImgUrl1(data.images.image1);
-                setImgUrl2(data.images.image2);
-                setTitle(data.title);
-                setAddress(data.address);
-                setOpeningHours(data.details.openingHours);
-                setIntro(data.details.introduction);
-            } catch (error) {
-                console.log(error);
-            }
-        }
         fetchData(id);
     }, [title]);
+
+    /* API calls */
+    const uploadSubmission = async (id) => {
+        const url = apiUrl + id;
+        const res = await fetch(url, {
+            method: "POST",
+            headers: {
+                "authorisation" : "bring " + localStorage.getItem("token"),
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(postObject)
+        });
+        const message = await res.json();
+        console.log(message);
+    }
+    const deleteSubmission = async (id) => {
+        const url = apiUrl + id;
+        const res = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "authorisation" : "bearer " + localStorage.getItem("token"),
+                "Content-Type" : "application/json"
+            },
+        });
+        const message = await res.json();
+        console.log(message);
+    }
+
+    /* Fetching the post data initially */
+    const fetchData = async (id) => {
+        try {
+            const url = apiUrl + id;
+            const res = await fetch(url);
+            const data = await res.json();
+            setPostObject(data);
+            setImgUrl1(data.images.image1);
+            setImgUrl2(data.images.image2);
+            setTitle(data.title);
+            setAddress(data.address);
+            setOpeningHours(data.details.openingHours);
+            setIntro(data.details.introduction);
+            setTag(data.tag);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    /* ****************** */
 
     return (
         <div className="page">
@@ -54,10 +95,17 @@ const ContentIntro = ( { apiUrl } ) => {
                         <p>{address}</p>
                         <p>{openingHours}</p>
                         <p>Written June 9 2023 by batman</p>
+                        {tag && <div className="tag">{tag}</div>}
                     </div>
+
+                    {isSubmission && 
+                    <div className="approval">
+                        <div className="approve" onClick={approveSubmission}>Approve</div>
+                        <div className="reject" onClick={rejectSubmission}>Reject</div>
+                    </div>}
+
                     <div className="review">
                         {formattedText}
-                        
                     </div>
                 </div>
                 <div className="side-content">
