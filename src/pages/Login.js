@@ -9,9 +9,9 @@ import "./login.css";
 const Login = () => {
     /* for setting the user that is logged in */
     const { setIsLoggedIn } = useContext(UserContext);
+    const { setfavouritesMap } = useContext(UserContext);
     
     const navigate = useNavigate();
-    const location = useLocation();
 
     const [signup, setSignup] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -56,7 +56,10 @@ const Login = () => {
                 if (loginResponse.ok) {
                     const data = await loginResponse.json();
                     const token = data.token;
+  
                     localStorage.setItem("token", token);
+                    localStorage.setItem("favourites", data.favourites);
+
                     setIsLoggedIn(true);
 
                     /*Go back to the previous page */

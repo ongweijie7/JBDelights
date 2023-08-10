@@ -15,18 +15,22 @@ const Menu = () => {
         setMenuOpen(!isMenuOpen);
     };
 
-    const viewFavourites = () => {
-       
-    };
-
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("favourites");
         logOutUser();
-        console.log(isLoggedIn);
     }
 
     const login = () => {
         navigate("/login");
+    }
+
+    const viewFavourites = () => {
+       navigate("/favourites")
+    };
+
+    const viewSubmissions = () => {
+        navigate("/admin/submissions")
     }
 
     return (
@@ -34,8 +38,8 @@ const Menu = () => {
             <ImMenu className="menu-button" onClick={toggleMenu}/>
             {isMenuOpen && (
             <div className="dropdown">
-                {user ? <p>{user}</p> : <p>You are not logged in</p>}
-            {isAdmin && <div onClick={() => navigate("/admin/submissions")}>View Submissions</div>}
+                {user ? <p>Hi {user}</p> : <p>You are not logged in</p>}
+            {isAdmin && <div onClick={viewSubmissions}>View Submissions</div>}
             <div onClick={viewFavourites}>Likes</div>
             <div onClick={ user ? logout : login }>{user ? "Log Out" : "Log in" }</div>
             </div>

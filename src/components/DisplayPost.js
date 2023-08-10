@@ -5,7 +5,8 @@ import Post from "./Post";
 
 import "./DisplayPost.css"
 
-const DisplayPost = ({ apiUrl, routeUrl }) => {
+
+const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
@@ -18,15 +19,14 @@ const DisplayPost = ({ apiUrl, routeUrl }) => {
                       },
                 });
                 const data = await res.json();
-                
                 setPosts(data);
+                return data
             } catch (error) {
                 console.log(error);
             }
         }
         getData();
-        setTimeout(() => console.log(posts), 1000);
-    }, [])
+    }, []);
     
 
     return (

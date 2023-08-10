@@ -8,11 +8,15 @@
     overflow: hidden;
     padding: 10px;
     margin: 0 30px 20px 30px ;
-    transition: transform 1s ease;
 }
 
-.post-container:hover {
-    transform: translateY(-10px);
+.post-container:hover .post-image {
+    transform: scale(1.02);
+}
+
+.post-title {
+    position: relative;
+
 }
 
 .post-image {
@@ -26,7 +30,7 @@
     transition: transform 1s ease;
 }
 
-.post-title {
+.post-title p {
     font-family: cursive;
     font-size: 1.5rem;
     font-weight: 900;
@@ -34,6 +38,28 @@
     text-align: center;
     margin-bottom: 10px;
     color:black;
+}
+
+.post-title p:hover {
+    color: blue;
+}
+
+.post-title > .heart {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: black 10px;
+}
+
+.post-title .unlike:hover {
+    color: rgb(255, 99, 71);
+}
+
+.post-title .like {
+    color: rgb(255, 99, 71);
 }
 
 .post-hook {

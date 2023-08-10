@@ -12,6 +12,7 @@ import FineDining from "./pages/finedining/FineDining";
 import FineDiningIntro  from "./pages/finedining/FineDiningIntro";
 import Home from "./pages/Home";
 import Food from "./pages/localdelights/Food";
+import Favourites from "./pages/Favourites";
 import FoodIntro from "./pages/localdelights/FoodIntro";
 import Login from "./pages/Login";
 import UserContext from "./UserContext";
@@ -23,22 +24,27 @@ const App = () => {
   const [token, setToken] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [favouritesMap, setfavouritesMap] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    const favourites = localStorage.getItem('favourites');
+    console.log(typeof favourites);
     try {
       if (token) {
         const decodedToken = jwt_decode(token);
         setToken(token);
         setUser(decodedToken.email);
         setIsAdmin(decodedToken.isAdmin);
+        const parsedFavourites = JSON.parse(favourites);
+        const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
+        setfavouritesMap(favouritesMap);
+        setIsLoggedIn(true);
       }
-      console.log(token);
     } catch (error) {
       console.error('Error decoding the JWT token:', error);
     }
-  }
-  ,[isLoggedIn]);
+  }, []);
 
   const logOutUser = () => {
     setUser(null);
@@ -49,7 +55,7 @@ const App = () => {
 
 
   return (
-    <UserContext.Provider value={{ user, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser}}>
+    <UserContext.Provider value={{ user, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser, favouritesMap, setfavouritesMap}}>
       <div className="app-container">
         <Navbar/>
         <AnimatePresence>
@@ -57,6 +63,8 @@ const App = () => {
             <Route path="/" element={<Home/>}/>
             
             <Route path="/login" element={<Login/>}/>
+
+            <Route path="/favourites" element={<Favourites/>}/>
 
             <Route path="/food">
               <Route index element={<Food/>}/>
