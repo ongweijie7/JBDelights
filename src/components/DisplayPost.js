@@ -19,7 +19,7 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
                       },
                 });
                 const data = await res.json();
-                setPosts(data);
+                setPosts(data.posts);
                 return data
             } catch (error) {
                 console.log(error);

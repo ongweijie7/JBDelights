@@ -1,7 +1,7 @@
 import "./Post.css";
 import { Link } from "react-router-dom";
 import { BsHeartFill, BsHeart } from "react-icons/bs"
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { refreshFavouritesAPI } from "../App.js";
 
 const Post = ({ routeUrl, index, title, image, hook }) => {
