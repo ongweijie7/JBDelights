@@ -2,25 +2,32 @@ import "./Post.css";
 import { Link } from "react-router-dom";
 import { BsHeartFill, BsHeart } from "react-icons/bs"
 import { useState, useContext, useEffect } from "react";
-
-import UserContext from "../UserContext";
+import { refreshFavouritesAPI } from "../App.js";
 
 const Post = ({ routeUrl, index, title, image, hook }) => {
-    const { favouritesMap } = useContext(UserContext);
     const [isLiked, setIsLiked] = useState(false);
+    const [isChanged, setisChanged] = useState(false);
 
     useEffect(() => {
+        refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
+        const favourites = localStorage.getItem("favourites");
+        const parsedFavourites = JSON.parse(favourites);
+        const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
         if (favouritesMap != null && favouritesMap.get(index) != null) {
             setIsLiked(true);
         }
-    }, [favouritesMap]);
+    }, []);
+
+    useEffect(() => {
+        refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
+    }, [isChanged]);
 
   
 
     /* API calls */
     const addPostToFavourites = async (post) => {
         try {
-            const url = "http://localhost:3000/food/like";
+            const url = "http://localhost:3000/login/like";
             const res = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -34,6 +41,7 @@ const Post = ({ routeUrl, index, title, image, hook }) => {
             }
             const parsedRes = await res.json();
             console.log(parsedRes.message);
+            setisChanged(true);
         } catch (error) {
             console.log(error);
         }
@@ -53,6 +61,9 @@ const Post = ({ routeUrl, index, title, image, hook }) => {
             if (res.status == 402) {
                 alert("Please log in again. Your session has expired");
             }
+            const parsedRes = await res.json();
+            console.log(parsedRes.message);
+            setisChanged(false);
         } catch (error) {
             console.log(error);
         }

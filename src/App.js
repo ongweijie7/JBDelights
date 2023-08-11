@@ -19,26 +19,43 @@ import UserContext from "./UserContext";
 
 import "./App.css";
 
+const refreshFavouritesAPI = async () => {
+  try {
+    const loginResponse = await fetch("http://localhost:3000/login/refresh", {
+        method: "GET",
+        headers: {
+          "authorisation" : "Bringer " + localStorage.getItem("token")
+        },
+    })
+    const res = await loginResponse.json();
+    return res.favourites;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export { refreshFavouritesAPI };
+
 const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [favouritesMap, setfavouritesMap] = useState(null);
+
+  const [hasChanges, setHasChanges] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
     const favourites = localStorage.getItem('favourites');
-    console.log(typeof favourites);
     try {
       if (token) {
         const decodedToken = jwt_decode(token);
         setToken(token);
         setUser(decodedToken.email);
         setIsAdmin(decodedToken.isAdmin);
-        const parsedFavourites = JSON.parse(favourites);
-        const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
-        setfavouritesMap(favouritesMap);
+        // const parsedFavourites = JSON.parse(favourites);
+        // const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
         setIsLoggedIn(true);
       }
     } catch (error) {
@@ -55,7 +72,7 @@ const App = () => {
 
 
   return (
-    <UserContext.Provider value={{ user, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser, favouritesMap, setfavouritesMap}}>
+    <UserContext.Provider value={{ user, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser}}>
       <div className="app-container">
         <Navbar/>
         <AnimatePresence>
