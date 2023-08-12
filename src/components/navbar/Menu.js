@@ -19,6 +19,7 @@ const Menu = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("favourites");
         logOutUser();
+        window.location.reload();
     }
 
     const login = () => {

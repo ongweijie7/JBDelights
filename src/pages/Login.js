@@ -76,9 +76,9 @@ const Login = () => {
                     /*Go back to the previous page */
                     navigate(-1);
                 } else {
-                    setFailedLoginMessage("Invalid email and password provided");
+                    const data = await loginResponse.json();
+                    setFailedLoginMessage(data.error);
                 }
-                
             } catch (error) {
                 console.log(error);
             }
@@ -93,7 +93,6 @@ const Login = () => {
         const passwordRegex = /^(?=.*[A-z])(?=.*\d)[A-z\d]{8,}$/;
         
         if (!emailRegex.test(newEmail)) {
-            console.log("hello");
             setFailedRegistrationMessage("Please provide a valid email address");
             setIsLoading(false);
             return;
@@ -116,13 +115,17 @@ const Login = () => {
                     },
                     body: JSON.stringify(details)
                 });
-                const data = await response.json();
-                console.log(data);
-                setIsSuccessfullyCreated(true);
-                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log(data.message);
+                    setIsSuccessfullyCreated(true);
+                } else {
+                    const data = await response.json();
+                    console.log(data.error);
+                    setFailedRegistrationMessage(data.error);
+                }
             } catch (error) {
-                console.log(error);
-                setUserExists(true);
+                setFailedRegistrationMessage(error);
             }
         }
 
