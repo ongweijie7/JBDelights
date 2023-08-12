@@ -9,17 +9,21 @@ const Post = ({ routeUrl, index, title, image, hook }) => {
     const [isChanged, setisChanged] = useState(false);
 
     useEffect(() => {
-        refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
-        const favourites = localStorage.getItem("favourites");
-        const parsedFavourites = JSON.parse(favourites);
-        const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
-        if (favouritesMap != null && favouritesMap.get(index) != null) {
-            setIsLiked(true);
+        if (localStorage.getItem("token") != null) {
+            refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
+            const favourites = localStorage.getItem("favourites");
+            const parsedFavourites = JSON.parse(favourites);
+            const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
+            if (favouritesMap != null && favouritesMap.get(index) != null) {
+                setIsLiked(true);
+            }
         }
     }, []);
 
     useEffect(() => {
-        refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
+        if (localStorage.getItem("token") != null) {
+            refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
+        }
     }, [isChanged]);
 
   
@@ -72,9 +76,13 @@ const Post = ({ routeUrl, index, title, image, hook }) => {
 
     /* onClick functions */
     const likePost = () => {
-        setIsLiked(true);
-        const post = { _id: index, category: "FOOD" };
-        addPostToFavourites(post);
+        if (localStorage.getItem("token") != null) {
+            setIsLiked(true);
+            const post = { _id: index, category: "FOOD" };
+            addPostToFavourites(post);
+        } else {
+            alert("Please log in to save to posts to favourites");
+        }
     }
 
     const unlikePost = () => {

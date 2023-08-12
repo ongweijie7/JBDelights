@@ -10,6 +10,9 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
+        if (isFavourites && (localStorage.getItem("token") == null)) {
+            return;
+        }
         const getData = async () => {
             try {
                 const url = apiUrl;

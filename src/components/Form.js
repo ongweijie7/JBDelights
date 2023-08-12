@@ -49,7 +49,7 @@ const Form = ( { createUrl } ) => {
         const images = { image1, image2 };
         const details = { openingHours, introduction };
         const blogPost = { title, address, images, details, hook };
-        createPost(blogPost);
+        createSubmission(blogPost);
 
         setTimeout(() => {
             setIsLoading(false);
@@ -58,7 +58,7 @@ const Form = ( { createUrl } ) => {
     };
 
     /* API calls */
-    const createPost = async (post) => {
+    const createSubmission = async (post) => {
         try {
             const createPost= await fetch(createUrl, {
                 method: "POST",
@@ -69,9 +69,12 @@ const Form = ( { createUrl } ) => {
             });
             const response = await createPost.json();
             const reply = await response.text;
+            if (!createPost.ok) {
+                alert("You have not filled in all the required fields");
+            }
             console.log(reply);
         } catch (error) {
-            console.log(error);
+            alert("Error when submitting your review");
         }
     }
     /* ************** */
