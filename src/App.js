@@ -42,26 +42,22 @@ const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [hasChanges, setHasChanges] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
-    const favourites = localStorage.getItem('favourites');
     try {
       if (token) {
         const decodedToken = jwt_decode(token);
         setToken(token);
         setUser(decodedToken.email);
         setIsAdmin(decodedToken.isAdmin);
-        // const parsedFavourites = JSON.parse(favourites);
-        // const favouritesMap = new Map(parsedFavourites.map(obj => [obj.key, obj.value]));
         setIsLoggedIn(true);
+        refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
       }
     } catch (error) {
       console.error('Error decoding the JWT token:', error);
     }
-  }, []);
+  }, [isLoggedIn]);
 
   const logOutUser = () => {
     setUser(null);

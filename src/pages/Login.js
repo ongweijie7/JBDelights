@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { BsArrowLeftSquareFill } from "react-icons/bs";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import UserContext from "../UserContext";
 
@@ -9,40 +9,51 @@ import "./login.css";
 const Login = () => {
     /* for setting the user that is logged in */
     const { setIsLoggedIn } = useContext(UserContext);
-    const { setfavouritesMap } = useContext(UserContext);
     
     const navigate = useNavigate();
 
     const [signup, setSignup] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const [email, setEmail] = useState("");
     const [password, setpassword] = useState("");
-
-    const [isWrongDetails, setIsWrongDetails] = useState(false);
+    const [failedLoginMessage, setFailedLoginMessage] = useState(null);
 
     const handleEmailInput = (event) => setEmail(event.target.value);
     const handlePasswordInput = (event) => setpassword(event.target.value);
 
+
+    /* Register information */
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
-    /* Register information */
-    const [isWrongRegisterDetails, setIsWrongRegisterDetails] = useState(false);
+    const [failedRegistrationMessage, setFailedRegistrationMessage] = useState(null);
     const [userExists, setUserExists] = useState(false);
     const [isSuccessfullyCreated, setIsSuccessfullyCreated] = useState(false);
-
 
     const handleCreateEmail = (event) => setNewEmail(event.target.value);
     const handleCreatePassword = (event) => setNewPassword(event.target.value);
     const handleConfirmPassword = (event) => setConfirmNewPassword(event.target.value);
+    /* *************************** */
 
+    /* Login and Registration handdle onClick functions */
+    const handleLogin = (email, password) => {
+        setFailedLoginMessage(null);
+        // setIsLoading(true);
 
-    const handleLogin = () => {
-        
-        setIsLoading(true);
+        const emailRegex = /^[A-z0-9]+@[A-z]+\.[A-z]{2,4}$/;
+
+        if (!emailRegex.test(email)) {
+            setFailedLoginMessage("Please provide a valid email address");
+            setIsLoading(false);
+            return;
+        } else if (password.length == 0) {
+            setFailedLoginMessage("Please provide a valid password");
+            setIsLoading(false);
+            return;
+        }
 
         const login = async (loginDetails) => {
             try {
@@ -65,7 +76,7 @@ const Login = () => {
                     /*Go back to the previous page */
                     navigate(-1);
                 } else {
-                    setIsWrongDetails(true);
+                    setFailedLoginMessage("Invalid email and password provided");
                 }
                 
             } catch (error) {
@@ -75,11 +86,24 @@ const Login = () => {
         login({email: email, password: password}).then((value) => setIsLoading(false));
     };
     
-    const handleSignUp = () => {
+    const handleSignUp = (newEmail, newPassword, confirmNewPassword) => {
+        setFailedRegistrationMessage(null);
         setIsLoading(true);
-
-        if (confirmNewPassword != newPassword) {
-            setIsWrongRegisterDetails(true);
+        const emailRegex = /^[A-z0-9]+@[A-z]+\.[A-z]{2,4}$/;
+        const passwordRegex = /^(?=.*[A-z])(?=.*\d)[A-z\d]{8,}$/;
+        
+        if (!emailRegex.test(newEmail)) {
+            console.log("hello");
+            setFailedRegistrationMessage("Please provide a valid email address");
+            setIsLoading(false);
+            return;
+        } else if (confirmNewPassword !== newPassword) {
+            setFailedRegistrationMessage("Please provide a matching passwords");
+            setIsLoading(false);
+            return;
+        } else if (!passwordRegex.test(newPassword)) {
+            setFailedRegistrationMessage("Please provide an alphanumeric password with at least 8 characters");
+            setIsLoading(false)
             return;
         }
 
@@ -93,6 +117,7 @@ const Login = () => {
                     body: JSON.stringify(details)
                 });
                 const data = await response.json();
+                console.log(data);
                 setIsSuccessfullyCreated(true);
                 
             } catch (error) {
@@ -110,61 +135,60 @@ const Login = () => {
     }
 
     return (
-        <section className="login">
-            <div className="content">
+        <section className="login-page">
+            <div className="login-form">
                 <p className="title">{!signup ? "LOGIN" : "Register"}</p>
                 {!signup ?
                     <>
-                    <div>
-                        <p className="label">UserName</p>
-                        <input type="text"
-                            placeholder="Username"
-                            value={email}
-                            onChange={handleEmailInput} />
-                    </div>
-                    <div>
-                        <p className="label">Password</p>
-                        <input type="password"
-                            placeholder="Password"
-                            value={password}
-                            onChange={handlePasswordInput} />
-                    </div>
-                    {isWrongDetails ? <p>Wrong username or password</p> : <></>}
+                        <div>
+                            <p className="label">UserName</p>
+                            <input type="text"
+                                placeholder="Email"
+                                value={email}
+                                onChange={handleEmailInput} />
+                        </div>
+                        <div>
+                            <p className="label">Password</p>
+                            <input type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={handlePasswordInput} />
+                        </div>
+                        {failedLoginMessage ? <p className="failed-message">{failedLoginMessage}</p> : <></>}
                     </>
                     :
-                    <>
-                    <div>
-                    <p className="label">Email</p>
-                    <input type="text"
-                        placeholder="Username"
-                        value={newEmail}
-                        onChange={handleCreateEmail} />
-                    </div>
+                    <div className="registration">
+                        <div>
+                            <p className="label">Email</p>
+                            <input type="text"
+                                placeholder="Email"
+                                value={newEmail}
+                                onChange={handleCreateEmail} />
+                        </div>
 
-                    <div>
-                    <p className="label">Enter Password</p>
-                    <input type="password"
-                        placeholder="Password"
-                        value={newPassword}
-                        onChange={handleCreatePassword} />
-                    </div>
+                        <div>
+                            <p className="label">Enter Password</p>
+                            <input type="password"
+                                placeholder="Password"
+                                value={newPassword}
+                                onChange={handleCreatePassword} />
+                        </div>
 
-                    <div>
-                    <p className="hidden">Confirm Password</p>
-                    <input type="password"
-                        placeholder="Confirm Password"
-                        value={confirmNewPassword}
-                        onChange={handleConfirmPassword} />
+                        <div>
+                            <p className="label">Confirm Password</p>
+                            <input type="password"
+                                placeholder="Confirm Password"
+                                value={confirmNewPassword}
+                                onChange={handleConfirmPassword} />
+                        </div>
+                        {failedRegistrationMessage ? <p className="failed-message">{failedRegistrationMessage}</p> : <></>}
+                        {isSuccessfullyCreated ? <p className="sucessful-message">Sucessfully created!</p> : <></>}
                     </div>
-                    {isWrongRegisterDetails ? <p>Password don't match</p> : <></>}
-                    {userExists ? <p>User already exists</p> : <></>}
-                    {isSuccessfullyCreated ? <p>Sucessfully created!</p> : <></>}
-                    </>
                 }
                 
 
                 
-                <button className="login-button" onClick={signup ? handleSignUp : handleLogin}>{signup ? "Sign Up" : "Login"}</button>
+                <button className="login-button" disabled={isLoading} onClick={signup ? () => handleSignUp(newEmail.trim(), newPassword, confirmNewPassword) : () => handleLogin(email.trim(), password)}>{signup ? "Sign Up" : "Login"}</button>
                 <p className="sign-up-link" onClick={() => setSignup(!signup)}>{signup ? "Back to login" : "Not a user yet? Click here to sign up" }</p>
                 <div className="go-back" onClick={goBack}>
                     <BsArrowLeftSquareFill  className="return-icon"/>

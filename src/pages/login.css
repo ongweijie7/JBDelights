@@ -1,5 +1,5 @@
 
-.login {
+.login-page {
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -9,52 +9,52 @@
     background-position: center;
 }
 
-.login > .content {
+.login-page > .login-form {
     background-color: var(--login--content-bg-color);
     padding: 60px;
     border-radius: 15px;
     box-shadow: 4px 4px 20px 1px;
     position: relative;
 }
-.login p {
+.login-page p {
     margin: 0;
 }
 
-.login > .content > * {
+.login-page > .login-form > * {
     margin-bottom: 20px;
 }
 
-.login > .content .title {
+.login-page > .login-form .title {
     text-align: center;
     font-weight: 600;
     font-size: var(--header-fs);
     margin: 50px;
 }
 
-.login div > * {
+.login-page div > * {
     margin-bottom: 10px;
 }
 
-.login div > .label { 
+.login-page div > .label { 
     font-size: calc(var(--label-fs) + 0.3rem);
     font-weight: 500;
 }
 
-.login div > input {
+.login-page div > input {
     width: 100%;
     font-size: var(--label-fs);
 }
 
-.login .sign-up-link {
+.login-page .sign-up-link {
     text-decoration: underline;
 }
 
-.login .sign-up-link:hover {
+.login-page .sign-up-link:hover {
     cursor: pointer;
     color: blue;
 }
 
-.login .go-back {
+.login-page .go-back {
     cursor: pointer;
     border-radius: 10px;
     margin-bottom: 0;
@@ -64,19 +64,28 @@
     /* background-color: black; */
 }
 
-.login .go-back .return-icon {
+.login-page .go-back .return-icon {
     font-size: calc(var(--label-fs) + 1rem);
     margin-bottom: 0;
     padding: 10px;
+    padding-left: 20px;
 }
 
-.login .login-button {
+.login-page .login-button {
     border-radius: 10px;
     font-size: calc(var(--label-fs) + 0.3rem);
     transition: transform 0.5s ease;
 }
-.login .login-button:hover {
+.login-page .login-button:hover {
     background-color: azure;
     cursor: pointer;
     transform: translateY(-5px);
+}
+
+.login-form .failed-message {
+    color: red;
+}
+
+.login-form .sucessful-message {
+    color: green
 }
