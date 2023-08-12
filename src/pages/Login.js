@@ -25,6 +25,7 @@ const Login = () => {
 
 
     /* Register information */
+    const [newUsername, setNewUsername] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -33,6 +34,7 @@ const Login = () => {
     const [userExists, setUserExists] = useState(false);
     const [isSuccessfullyCreated, setIsSuccessfullyCreated] = useState(false);
 
+    const handleCreateUsername = (event) => setNewUsername(event.target.value);
     const handleCreateEmail = (event) => setNewEmail(event.target.value);
     const handleCreatePassword = (event) => setNewPassword(event.target.value);
     const handleConfirmPassword = (event) => setConfirmNewPassword(event.target.value);
@@ -86,7 +88,7 @@ const Login = () => {
         login({email: email, password: password}).then((value) => setIsLoading(false));
     };
     
-    const handleSignUp = (newEmail, newPassword, confirmNewPassword) => {
+    const handleSignUp = (newUsername, newEmail, newPassword, confirmNewPassword) => {
         setFailedRegistrationMessage(null);
         setIsLoading(true);
         const emailRegex = /^[A-z0-9]+@[A-z]+\.[A-z]{2,4}$/;
@@ -129,7 +131,7 @@ const Login = () => {
             }
         }
 
-        registerUser({email: newEmail, password: newPassword}).then((value) => setIsLoading(false));
+        registerUser({ username: newUsername, email: newEmail, password: newPassword }).then((value) => setIsLoading(false));
         
     };
 
@@ -168,6 +170,13 @@ const Login = () => {
                                 value={newEmail}
                                 onChange={handleCreateEmail} />
                         </div>
+                        <div>
+                            <p className="label">Username</p>
+                            <input type="text"
+                                placeholder="username"
+                                value={newUsername}
+                                onChange={handleCreateUsername} />
+                        </div>
 
                         <div>
                             <p className="label">Enter Password</p>
@@ -191,7 +200,7 @@ const Login = () => {
                 
 
                 
-                <button className="login-button" disabled={isLoading} onClick={signup ? () => handleSignUp(newEmail.trim(), newPassword, confirmNewPassword) : () => handleLogin(email.trim(), password)}>{signup ? "Sign Up" : "Login"}</button>
+                <button className="login-button" disabled={isLoading} onClick={signup ? () => handleSignUp(newUsername.trim(), newEmail.trim(), newPassword, confirmNewPassword) : () => handleLogin(email.trim(), password)}>{signup ? "Sign Up" : "Login"}</button>
                 <p className="sign-up-link" onClick={() => setSignup(!signup)}>{signup ? "Back to login" : "Not a user yet? Click here to sign up" }</p>
                 <div className="go-back" onClick={goBack}>
                     <BsArrowLeftSquareFill  className="return-icon"/>

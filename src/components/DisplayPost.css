@@ -8,3 +8,23 @@
     justify-content: start;
     align-items: stretch;
 }
+
+.not-logged-in-favourites {
+    margin: 400px auto;
+    text-align: center;
+    max-width: 45ch;
+    font-size: 50px;
+    font-weight: 600;
+    font-style: italic;
+    color: black;
+}
+
+.empty-favourites {
+    margin: 400px auto;
+    text-align: center;
+    max-width: 45ch;
+    font-size: 50px;
+    font-weight: 600;
+    font-style: italic;
+    color: black;
+}

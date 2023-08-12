@@ -1,5 +1,6 @@
 import Menu from "./Menu";
 import { Link, useLocation } from "react-router-dom";
+import { BsFillChatHeartFill } from "react-icons/bs";
 
 import "./navbar.css";
 
@@ -11,7 +12,7 @@ const Navbar = () => {
     } else {
         return (
             <div className="Navbar">
-                <Link to="/" className="Title">JB Delights ❤️ </Link>
+                <Link to="/" className="Title">JB Delights <BsFillChatHeartFill/> </Link>
                  <div className="Pages">
                     {location.pathname == "/"
                     ? <Menu/>
@@ -20,8 +21,8 @@ const Navbar = () => {
                         <li><Link to="/food">Local Delights</Link></li>
                         <li><Link to="/fineDining">Fine Dining</Link></li>
                         <li><Link to="/adventures">Adventures</Link></li>
-                        <Menu />
-                    </ul></>
+                    </ul>
+                    <Menu /></>
                 
                     }
                     

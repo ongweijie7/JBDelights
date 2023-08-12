@@ -43,13 +43,16 @@ export default function Home() {
         
         <div className="home-container">
             <div className="welcome-section">
-                <p>Experience the enchantment of Johor Bahru, Malaysia's vibrant city. 
-                Discover its rich heritage, iconic landmarks, and tantalizing cuisine. 
-                From family fun to natural beauty, uncover the allure of this captivating destination.
-                </p>
-                <Button onClick={() => scrollDown(navSection)}>
-                        Click To Begin Exploring
-                </Button> 
+                <div className="introduction">
+                    <p>Experience the enchantment of Johor Bahru, Malaysia's vibrant city. 
+                    Discover its rich heritage, iconic landmarks, and tantalizing cuisine. 
+                    From family fun to natural beauty, uncover the allure of this captivating destination.
+                    </p>
+                    <div className="explore-button" onClick={() => scrollDown(navSection)}>
+                            Click To Begin Exploring
+                    </div> 
+                </div>
+                
             </div>
             <div className="nav-section" ref={navSection}>
                 <Link to="food">

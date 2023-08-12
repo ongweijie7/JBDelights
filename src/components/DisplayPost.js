@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import Loading from "./Loading";
 import Post from "./Post";
 
+import UserContext from "../UserContext";
 import "./DisplayPost.css"
 
 
 const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
+    const { username } = useContext(UserContext);
     const [posts, setPosts] = useState(null);
 
     useEffect(() => {
@@ -22,6 +24,7 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
                       },
                 });
                 const data = await res.json();
+                console.log(data.posts);
                 setPosts(data.posts);
                 return data
             } catch (error) {
@@ -30,7 +33,19 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
         }
         getData();
     }, []);
-    
+    if (username == null) {
+        return (
+            <div className="not-logged-in-favourites">
+                Log in or Create and account to view your liked posts here!
+            </div>
+        )
+    } else if (posts != null && posts.length == 0) {
+        return (
+            <div className="empty-favourites">
+                The posts you have liked will show up here!
+            </div>
+        )
+    }
 
     return (
         <>

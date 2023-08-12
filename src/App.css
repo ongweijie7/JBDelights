@@ -4,10 +4,15 @@
   --label-fs: calc(0.5rem + 1vh);
   --login--content-bg-color: antiquewhite;
 
-  /* nabvbar */
-  --navbar-header-fs: 3rem;
-  --navbar-fs: 1.8rem;
+  /* navbar */
+  --navbar-header-fs: 3.5rem;
+  --navbar-fs: 2.3rem;
   --navbar-color: #333;
+
+  /* home page navigation section */
+  --home-nav-bg-color: rgb(238, 214, 175, 0.35);
+  --nav-cards-shadow: 5px 5px 20px 2px black;
+  
 }
 
 /* Removes the white spaces*/

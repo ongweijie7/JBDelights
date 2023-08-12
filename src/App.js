@@ -27,8 +27,15 @@ const refreshFavouritesAPI = async () => {
           "authorisation" : "Bringer " + localStorage.getItem("token")
         },
     })
-    const res = await loginResponse.json();
-    return res.favourites;
+    if (!loginResponse.ok) {
+      const res = await loginResponse.json();
+      localStorage.removeItem("token");
+      alert(res.error);
+    } else {
+      const res = await loginResponse.json();
+      return res.favourites;
+    }
+    
   } catch (error) {
     console.log(error);
   }
@@ -37,7 +44,7 @@ const refreshFavouritesAPI = async () => {
 export { refreshFavouritesAPI };
 
 const App = () => {
-  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState(null);
   const [token, setToken] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -49,7 +56,7 @@ const App = () => {
       if (token) {
         const decodedToken = jwt_decode(token);
         setToken(token);
-        setUser(decodedToken.email);
+        setUsername(decodedToken.username);
         setIsAdmin(decodedToken.isAdmin);
         setIsLoggedIn(true);
         refreshFavouritesAPI().then(fav => localStorage.setItem("favourites", fav));
@@ -60,7 +67,7 @@ const App = () => {
   }, [isLoggedIn]);
 
   const logOutUser = () => {
-    setUser(null);
+    setUsername(null);
     setToken(null);
     setIsAdmin(null);
     setIsLoggedIn(false);
@@ -68,7 +75,7 @@ const App = () => {
 
 
   return (
-    <UserContext.Provider value={{ user, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser}}>
+    <UserContext.Provider value={{ username, token, isAdmin, isLoggedIn, setIsLoggedIn, logOutUser}}>
       <div className="app-container">
         <Navbar/>
         <AnimatePresence>

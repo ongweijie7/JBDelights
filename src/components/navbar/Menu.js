@@ -1,15 +1,17 @@
 import UserContext from '../../UserContext';
-import { useContext, useState } from 'react';
-import { ImMenu } from "react-icons/im";
-import { Link, useNavigate } from 'react-router-dom';
+import { useContext, useState, useRef } from 'react';
+import { BiLogOut, BiLike } from "react-icons/bi";
+import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa";
 
 import "./menu.css";
 
 const Menu = () => {
-    const { user, isAdmin, isLoggedIn, logOutUser} = useContext(UserContext);
-
+    const { username, isAdmin, isLoggedIn, logOutUser} = useContext(UserContext);
+    console.log(username);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const menuRef = useRef();
 
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
@@ -22,27 +24,45 @@ const Menu = () => {
         window.location.reload();
     }
 
-    const login = () => {
+    const login = (event) => {
         navigate("/login");
     }
 
-    const viewFavourites = () => {
-       navigate("/favourites")
+    const viewFavourites = (event) => {
+        navigate("/favourites")
     };
 
-    const viewSubmissions = () => {
+    const viewSubmissions = (event) => {
         navigate("/admin/submissions")
     }
 
     return (
-        <div className="menu-container" >
-            <ImMenu className="menu-button" onClick={toggleMenu}/>
+        <div className="menu-container" onClick={toggleMenu} ref={menuRef}>
+            <FaUser className="icon"/>
             {isMenuOpen && (
-            <div className="dropdown">
-                {user ? <p>Hi {user}</p> : <p>You are not logged in</p>}
-            {isAdmin && <div onClick={viewSubmissions}>View Submissions</div>}
-            <div onClick={viewFavourites}>Likes</div>
-            <div onClick={ user ? logout : login }>{user ? "Log Out" : "Log in" }</div>
+            <div className="dropdown" >
+                {username 
+                ? <div className="profile" onClick={(event) => event.stopPropagation()}>
+                    <div className="profile-pic">
+                        <FaUser className="icon-2"/>    
+                    </div>
+                    Hi {username}!
+                </div> 
+                : <div className="profile" onClick={(event) => event.stopPropagation()}>
+                    <div className="profile-pic">
+                        <FaUser className="icon-2"/>    
+                    </div>
+                    You are not logged in
+                </div>}
+                {isAdmin && <div className="user-buttons" onClick={viewSubmissions}>View Submissions</div>}
+                <div className="user-buttons" onClick={viewFavourites}>
+                    <p>Your favourites</p>
+                    <BiLike className="icon-1"/>
+                </div>
+                <div className="user-buttons" onClick={ username ? logout : login }>
+                    {username ? <p>Log out</p>: <p>Log in</p> }
+                   <BiLogOut className="icon-2"/>
+                </div>
             </div>
             )}
         </div>

@@ -1,35 +1,119 @@
 .menu-container {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
     position: relative;
-    margin-right: 20px;
+    margin-right: 50px;
     justify-content: center;
+    height: calc(var(--navbar-fs) + 30px);
+    width: calc(var(--navbar-fs) + 30px);
+    border: 4px solid grey;
+    background-color: white;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.menu-container .icon {
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
 }
 
 .menu-container .menu-button {
-    font-size: calc(var(--navbar-fs) + 20px); 
+    font-size: calc(var(--navbar-fs) + 30px); 
     color: white;
 }
 
-.dropdown {
+.menu-container .dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     width: 20ch;
     border-radius: 5px;
     position: absolute;
-    top: 100%;
+    top: 150%;
     right: 0;
     color: white;
-    background: black;
-    padding: 20px;
+    background: rgb(102, 102, 102);
+    padding: 15px;
     z-index: 11;
     font-size: var(--navbar-fs);
 }
 
-.dropdown * {
-    margin: 10px;
+.menu-container .dropdown:before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    right: 10px;
+    background: rgb(102, 102, 102);
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
 }
 
-.dropdown > div:hover{
+.dropdown .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: aliceblue;
+}
+
+.dropdown .profile-pic {
+    position: relative;
+    box-sizing: border-box;
+    height: calc(var(--navbar-fs) + 30px);
+    width: calc(var(--navbar-fs) + 30px);
+    border: 4px solid grey;
+    border-radius: 50px;
+    background-color: whitesmoke;
+    margin-bottom: 20px
+}
+
+.dropdown .profile-pic .icon-2 {
+    color: black;
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+}
+
+.dropdown > div {
+    box-sizing: border-box;
+    margin: 5px 0;
+    width: 100%;
+    padding: 10px;
+    font-size: calc(var(--navbar-fs) - 0.5rem);
+    cursor: default;
+    color: white;
+}
+
+.dropdown > .user-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown > .user-buttons > p {
+    margin: 0;
+}
+
+.dropdown > .user-buttons:hover{
+    border-radius: 10px;
     background-color: #555;
     cursor: pointer;
+}
+
+.dropdown > .user-buttons > .icon-1 {
+    font-size: 39px;
+}
+
+.dropdown > .user-buttons > .icon-2 {
+    font-size: 40px;
+    padding-right: 5px;
 }
