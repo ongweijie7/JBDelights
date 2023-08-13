@@ -173,7 +173,7 @@ const Login = () => {
                         <div>
                             <p className="label">Username</p>
                             <input type="text"
-                                placeholder="username"
+                                placeholder="Username"
                                 value={newUsername}
                                 onChange={handleCreateUsername} />
                         </div>

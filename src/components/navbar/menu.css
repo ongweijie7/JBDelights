@@ -108,17 +108,31 @@
     margin: 0;
 }
 
-.dropdown > .user-buttons:hover{
+.dropdown > .user-buttons:hover {
     border-radius: 10px;
     background-color: #555;
     cursor: pointer;
+    
+}
+
+.dropdown > .user-buttons:hover p {
+    font-weight: 600;
 }
 
 .dropdown > .user-buttons > .icon-1 {
     font-size: 39px;
+    transition: transform 0.5s;
 }
 
 .dropdown > .user-buttons > .icon-2 {
     font-size: 40px;
     padding-right: 5px;
+    transition: transform 0.3s ease-in;
+}
+
+.dropdown > .user-buttons:hover .icon-1 {
+    transform: translateX(3px);
+}
+.dropdown > .user-buttons:hover .icon-2 {
+    transform: translateX(3px);
 }

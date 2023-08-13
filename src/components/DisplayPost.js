@@ -7,7 +7,7 @@ import UserContext from "../UserContext";
 import "./DisplayPost.css"
 
 
-const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
+const DisplayPost = ({ apiUrl, routeUrl, isFavourites, toggletitle }) => {
     const { username } = useContext(UserContext);
     const [posts, setPosts] = useState(null);
 
@@ -24,7 +24,9 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
                       },
                 });
                 const data = await res.json();
-                console.log(data.posts);
+                if (isFavourites && data.posts.length != 0) {
+                    toggletitle(true);
+                }
                 setPosts(data.posts);
                 return data
             } catch (error) {

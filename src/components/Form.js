@@ -47,8 +47,8 @@ const Form = ( { createUrl } ) => {
         event.preventDefault();
 
         const images = { image1, image2 };
-        const details = { openingHours, introduction };
-        const blogPost = { title, address, images, details, hook };
+        const details = { openingHours: "", introduction };
+        const blogPost = { title, address, images, details, hook: "" };
         createSubmission(blogPost);
 
         setTimeout(() => {
@@ -81,11 +81,11 @@ const Form = ( { createUrl } ) => {
 
     return (
     <div className="form-container">
-        <h2>Have something to share?</h2>
+        <h2>Have a place to share?</h2>
         <form onSubmit={handleSubmit}>
         <input
             type="text"
-            placeholder="Title of the dish"
+            placeholder="Title of the place"
             value={title}
             onChange={handleTitleChange}
         />
@@ -97,20 +97,20 @@ const Form = ( { createUrl } ) => {
         />
         <input
             type="text"
-            placeholder="Image1"
+            placeholder="Image"
             value={image1}
             onChange={handleImage1}
         />
-        <input
+        {/* <input
             placeholder="Hook"
             value={hook}
             onChange={handleHook}
-        />
-        <input
+        /> */}
+        {/* <input
             placeholder="Opening hours"
             value={openingHours}
             onChange={handleOpeningHours}
-        />
+        /> */}
         <textarea
             placeholder="Introduction"
             value={introduction}

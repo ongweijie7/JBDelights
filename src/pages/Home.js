@@ -1,33 +1,9 @@
+import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import "./Home.css";
-
-const Button = styled.button ` 
-    font-family: 'cursive', sans-sarif;
-    font-size: 50px;
-    font-style: italic;
-    font-weight: bolder;
-    background-color : #eeeeee;
-    padding: 15px 20px;
-    border-radius: 15px;
-    border-width: 3px;
-    outline: 0;
-    font-weight: 100;
-    font-size: 25px;
-    margin: 50px auto;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transition: transform 0.5s ease;
-
-    &:hover {
-        background-color: #87CEEB;
-        
-        transform: translateY(-10px);
-    }
-    
-` 
 
 export default function Home() {
     const navSection = useRef(null);
@@ -39,11 +15,17 @@ export default function Home() {
         })
     }
 
+    const fadeInVariants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 }
+      };
+      
+
     return (
         
         <div className="home-container">
             <div className="welcome-section">
-                <div className="introduction">
+                <motion.div className="introduction" initial="hidden" animate="visible" variants={fadeInVariants} transition={{ duration: 1.5, delay: 0.1 }}>
                     <p>Experience the enchantment of Johor Bahru, Malaysia's vibrant city. 
                     Discover its rich heritage, iconic landmarks, and tantalizing cuisine. 
                     From family fun to natural beauty, uncover the allure of this captivating destination.
@@ -51,7 +33,7 @@ export default function Home() {
                     <div className="explore-button" onClick={() => scrollDown(navSection)}>
                             Click To Begin Exploring
                     </div> 
-                </div>
+                </motion.div>
                 
             </div>
             <div className="nav-section" ref={navSection}>
