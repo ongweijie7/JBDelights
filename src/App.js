@@ -30,6 +30,7 @@ const refreshFavouritesAPI = async () => {
     if (!loginResponse.ok) {
       const res = await loginResponse.json();
       localStorage.removeItem("token");
+      window.location.reload();
       alert(res.error);
     } else {
       const res = await loginResponse.json();

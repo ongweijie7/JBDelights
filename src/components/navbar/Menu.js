@@ -8,7 +8,6 @@ import "./menu.css";
 
 const Menu = () => {
     const { username, isAdmin, isLoggedIn, logOutUser} = useContext(UserContext);
-    console.log(username);
     const [isMenuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
     const menuRef = useRef();

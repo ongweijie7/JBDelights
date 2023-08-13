@@ -33,10 +33,10 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites }) => {
         }
         getData();
     }, []);
-    if (username == null) {
+    if (isFavourites && username == null) {
         return (
             <div className="not-logged-in-favourites">
-                Log in or Create and account to view your liked posts here!
+                Log in or create an account to view your liked posts here!
             </div>
         )
     } else if (posts != null && posts.length == 0) {

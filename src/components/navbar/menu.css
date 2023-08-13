@@ -10,6 +10,11 @@
     cursor: pointer;
 }
 
+.menu-container:hover {
+    background-color: #555;
+}
+
+
 .menu-container .icon {
     position: absolute;
     box-sizing: border-box;

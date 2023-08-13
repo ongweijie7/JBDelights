@@ -22,6 +22,7 @@
 
 .Navbar ul {
   display: flex;
+  flex-direction: row;
   list-style-type: none;
   align-items: center;
   margin-right: 50px;
@@ -34,26 +35,29 @@
   display: inline-block;
   text-align: center;
   font-size: var(--navbar-fs);
-}
-
-.Navbar li:active {
-  background-color: #777
+  padding: 10px 15px;
 }
 
 .Navbar li:hover {
-  background-color: #555
+  background-color: #555;
+  border-radius: 5px;
 }
 
-.Navbar .Pages ul li > a {
+.Navbar .Pages ul a {
   text-decoration: none;
   color: white;
   font-weight: bold;
+}
+
+.Navbar .Pages ul li a:active {
+  color: black;
 }
 
 .Navbar .Pages {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   color: black;
 }
 
