@@ -8,6 +8,6 @@ Community Contributions: Users can review and submit new itininararies.
 Liked Posts: Logged-in users can revisit posts they've liked.
 Comprehensive Itineraries: Detailed itineraries including expenditures.
 
-# Technology Stack
+## Technology Stack
 Front-end: React, HTML, CSS, Framer Motion, React Icons
 Back-end: Node.js with Express (https://github.com/ongweijie7/MyJbBlog-Server)https://github.com/ongweijie7/MyJbBlog-Server)
