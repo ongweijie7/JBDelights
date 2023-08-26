@@ -10,4 +10,4 @@ Comprehensive Itineraries: Detailed itineraries including expenditures.
 
 ## Technology Stack
 Front-end: React, HTML, CSS, Framer Motion, React Icons
-Back-end: Node.js with Express (https://github.com/ongweijie7/MyJbBlog-Server)https://github.com/ongweijie7/MyJbBlog-Server)
+Back-end: Node.js with Express (https://github.com/ongweijie7/MyJbBlog-Server))
