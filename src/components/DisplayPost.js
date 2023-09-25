@@ -1,11 +1,10 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
+import UserContext from "../UserContext";
 import Loading from "./Loading";
 import Post from "./Post";
 
-import UserContext from "../UserContext";
 import "./DisplayPost.css"
-
 
 const DisplayPost = ({ apiUrl, routeUrl, isFavourites, toggletitle }) => {
     const { username } = useContext(UserContext);
@@ -23,12 +22,16 @@ const DisplayPost = ({ apiUrl, routeUrl, isFavourites, toggletitle }) => {
                         "authorisation" : "bring " + localStorage.getItem("token")
                       },
                 });
-                const data = await res.json();
-                if (isFavourites && data.posts.length != 0) {
+                const jsonResponse = await res.json();
+                if (res.ok) {
+                    setPosts(jsonResponse.data);
+                } else {
+                    console.log(jsonResponse.data);
+                }
+                console.log(jsonResponse.data);
+                if (isFavourites && jsonResponse.data.length != 0) {
                     toggletitle(true);
                 }
-                setPosts(data.posts);
-                return data
             } catch (error) {
                 console.log(error);
             }

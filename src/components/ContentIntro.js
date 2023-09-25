@@ -38,7 +38,7 @@ const ContentIntro = ( { apiUrl, isSubmission } ) => {
         fetchData(id);
     }, [title]);
 
-    /* API calls */
+    /* API calls for admin to approve the submissions*/
     const uploadSubmission = async (id) => {
         const url = apiUrl + id;
         const res = await fetch(url, {
@@ -64,21 +64,28 @@ const ContentIntro = ( { apiUrl, isSubmission } ) => {
         const message = await res.json();
         console.log(message);
     }
+    /* ****************** */
 
     /* Fetching the post data initially */
     const fetchData = async (id) => {
         try {
             const url = apiUrl + id;
             const res = await fetch(url);
-            const data = await res.json();
-            setPostObject(data);
-            setImgUrl1(data.images.image1);
-            setImgUrl2(data.images.image2);
-            setTitle(data.title);
-            setAddress(data.address);
-            setOpeningHours(data.details.openingHours);
-            setIntro(data.details.introduction);
-            setTag(data.tag);
+            
+            const jsonResponse = await res.json();
+            const data = jsonResponse.data;
+            if (res.ok) {
+                setPostObject(data);
+                setImgUrl1(data.images.image1);
+                setImgUrl2(data.images.image2);
+                setTitle(data.title);
+                setAddress(data.address);
+                setOpeningHours(data.details.openingHours);
+                setIntro(data.details.introduction);
+                setTag(data.tag);
+            } else {
+                console.log(data);
+            }
         } catch (error) {
             console.log(error);
         }

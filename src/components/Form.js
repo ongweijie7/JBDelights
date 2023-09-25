@@ -67,14 +67,14 @@ const Form = ( { createUrl } ) => {
                 },
                 body: JSON.stringify(post)
             });
-            const response = await createPost.json();
-            const reply = await response.text;
+            const jsonResponse = await createPost.json();
+            const message = await jsonResponse.data;
             if (!createPost.ok) {
                 alert("You have not filled in all the required fields");
             }
-            console.log(reply);
+            console.log(message);
         } catch (error) {
-            alert("Error when submitting your review");
+            alert("Server error when submitting your review. Please try again later");
         }
     }
     /* ************** */
